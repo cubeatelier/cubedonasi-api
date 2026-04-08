@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 
-// Middleware untuk membaca format JSON dari SociaBuzz
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Variabel penampung donasi terakhir
 let latestDonation = null;
 
+// Endpoint Webhook untuk SociaBuzz
 app.post("/webhook", (req, res) => {
   const data = req.body;
   console.log("Menerima Webhook:", data);
@@ -19,14 +19,13 @@ app.post("/webhook", (req, res) => {
     message: data.message || "Tidak ada pesan"
   };
 
-  console.log("Data disiapkan untuk Roblox:", latestDonation);
   res.status(200).send("Webhook sukses diterima!");
 });
 
+// Endpoint untuk ditarik oleh Roblox
 app.get("/donations", (req, res) => {
   res.json({ latestDonation: latestDonation });
 });
 
-const listener = app.listen(process.env.PORT || 3000, () => {
-  console.log("Server API menyala di port " + listener.address().port);
-});
+// WAJIB UNTUK VERCEL: Export app-nya (bukan app.listen)
+module.exports = app;
