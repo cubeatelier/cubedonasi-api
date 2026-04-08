@@ -34,7 +34,7 @@ app.get("/tes-donasi", (req, res) => {
   // Kita buat data donasi bohongan sebesar Rp 50.000 agar Cinematic-nya nyala
   latestDonation = {
     id: Date.now().toString(),
-    name: "Sultan Tester",
+    name: "VYBExAlphaa",
     amount: 50000, 
     message: "Halo CUBE CLUB! Ini tes efek layarnya!"
   };
