@@ -35,7 +35,7 @@ app.get("/tes-donasi", (req, res) => {
   latestDonation = {
     id: Date.now().toString(),
     name: "ahmadali551",
-    amount: 50000, 
+    amount: 10000, 
     message: "Halo CUBE CLUB! Ini tes efek layarnya!"
   };
   
