@@ -8,28 +8,18 @@ app.use(express.urlencoded({ extended: true }));
 let latestDonation = null;
 
 // ==========================================
-// ENDPOINT UTAMA: MENERIMA DONASI ASLI
+// ENDPOINT 3: JALUR TES RAHASIA VIA BROWSER
 // ==========================================
-app.post("/webhook", (req, res) => {
-  const data = req.body;
-  console.log("Menerima Webhook Asli:", data);
-
-  // Mengambil data murni langsung dari SociaBuzz
+app.get("/tes-donasi", (req, res) => {
+  // Kita buat data donasi bohongan sebesar Rp 50.000 agar Cinematic-nya nyala
   latestDonation = {
     id: Date.now().toString(),
-    name: data.supporter_name || "Seseorang",
-    amount: data.amount || 0, // <-- Menggunakan nominal asli dari pendonor!
-    message: data.message || ""
+    name: "Sultan Tester",
+    amount: 50000, 
+    message: "Halo CUBE CLUB! Ini tes efek layarnya!"
   };
-
-  res.status(200).send("Webhook sukses diterima!");
-});
-
-// ==========================================
-// ENDPOINT: DIAMBIL OLEH ROBLOX STUDIO
-// ==========================================
-app.get("/donations", (req, res) => {
-  res.json({ latestDonation: latestDonation });
+  
+  res.send("<h1>✅ Sinyal donasi Rp 50.000 sukses ditembakkan!</h1><p>Sekarang cepat buka layar Roblox Studio kamu, dalam 10 detik efeknya akan muncul!</p>");
 });
 
 // WAJIB UNTUK VERCEL
