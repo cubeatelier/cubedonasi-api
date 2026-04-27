@@ -14,12 +14,12 @@ app.post("/webhook", (req, res) => {
   const data = req.body;
   console.log("Menerima Webhook Asli:", data);
 
-  // Mengambil data murni langsung dari SociaBuzz
+// Mengambil data murni langsung dari SociaBuzz (Dengan Jaring Penangkap Lebih Lebar!)
   latestDonation = {
     id: Date.now().toString(),
-    name: data.supporter_name || "Seseorang",
-    amount: data.amount || 0, // <-- Menggunakan nominal asli dari pendonor!
-    message: data.message || ""
+    name: data.supporter || data.supporter_name || data.donor_name || data.name || "Seseorang",
+    amount: data.amount || 0, 
+    message: data.message || data.supporter_message || ""
   };
 
   res.status(200).send("Webhook sukses diterima!");
